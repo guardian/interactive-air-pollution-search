@@ -1,0 +1,16 @@
+$types: (
+    collection: #ffcc4c,
+    drop-off: #5bb64f,
+    vigil: #6e3988,
+    fundraising: #cd2e27,
+    other: #63717b
+);
+
+@import "fonts";
+@import "mq";
+@import "lib/leaflet";
+@import "general";
+@import "share";
+@import "map";
+@import "user";
+@import "madlib";
