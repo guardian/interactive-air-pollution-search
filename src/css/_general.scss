@@ -1,60 +1,141 @@
-html {
-    @include mq(tablet) {
-        overflow-y: hidden;
-    }
-}
-
-body,
-figure.interactive {
+body {
     margin: 0;
     padding: 0;
+    background-color: white;
     color: #333;
-    background-color: #dcdcdc;
     overflow-x: hidden;
 }
 
 p {
     margin: 0 0 8px 0;
-    &:last-child {
-        margin-bottom: 0;
+    @include fs-bodyCopy(2);
+    max-width: 640px;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    @include fs-header(3);
+    margin: 0 0 12px 0;
+}
+
+.data {
+    @include fs-textSans(1);
+    color: #bdbdbd;
+    @include mq(leftCol) {
+        margin-left: 160px;
+    }
+    @include mq(wide) {
+        margin-left: 240px;
     }
 }
 
-// Link styles don't exist on the app
-a {
-    &,
-    &:hover,
-    &:active {
-        color: #005689;
+.amendment {
+    @include mq(leftCol) {
+        margin-left: 160px;
     }
+    @include mq(wide) {
+        margin-left: 240px;
+    }
+    &::before {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 100px;
+        margin-right: 2px;
+        background-color: #bdbdbd;
+    }
+}
 
+// MAIN ONLY
+.forces {
+}
+
+.regions__region {
+    clear: left;
+    overflow: hidden;
+
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.region-title {
+    position: relative;
+    max-width: 940px;
+    @include mq(leftCol) {
+        width: 160px;
+        float: left;
+    }
+    @include mq(wide) {
+        width: 240px;
+    }
+}
+
+.region-title__img {
+    width: 120px;
+    float: right;
+    margin: 0 0 10px 10px;
+
+    @include mq(leftCol) {
+        width: 150px;
+        margin: 10px 0 0;
+        position: absolute;
+        top: 100%;
+    }
+    @include mq(wide) {
+        margin-left: 40px;
+    }
+}
+
+.region-col {
+    max-width: 940px;
+    @include mq(leftCol) {
+        overflow: hidden;
+    }
+}
+
+.region-copy {
+}
+
+// EMBED ONLY
+.locate {
+    @include fs-bodyHeading(3);
+    color: #333;
+    line-height: 38px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.see-all {
+    @include fs-textSans(2);
+    display: inline-block;
+    border-radius: 100px;
+    color: white;
+    line-height: 34px;
+    font-weight: bold;
+    text-align: center;
     text-decoration: none;
+    background-color: #005689;
+    padding: 0 5px 0 14px;
+    margin: 10px 0 0;
     &:hover {
-        text-decoration: underline;
+        background-color: #003656;
+    }
+
+    & > svg {
+        display: inline-block;
+        vertical-align: middle;
     }
 }
 
-
-.interactive-es6-headline {
-	@include fs-headline(5);
+.placeholder {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
 }
-
-.test-msg {
-	color: #005689;
-	@include fs-textSans(3);
-}
-
-.fonts {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	margin-top: 24px;
-	li {
-		margin-bottom: 6px;
-	}
-}
-
-.fonts__egyptian { @include fs-headline(3); }
-.fonts__text-egyptian { @include fs-bodyCopy(2); }
-.fonts__sans { @include f-headlineSans; }
-.fonts__text-sans { @include fs-textSans(4); }

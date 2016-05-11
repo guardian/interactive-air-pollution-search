@@ -1,34 +1,58 @@
-.wm-madlib {
+.madlib {
+    display: inline-block;
+    vertical-align: middle;
     border: 1px solid #bdbdbd;
     border-radius: 100px;
     background: white;
-    margin-bottom: 8px;
-    padding: 5px 0 6px;
-
-    @include f-headline;
+    max-width: 220px;
+    overflow: hidden;
+    margin-right: 3px;
 }
 
-.wm-madlib__input {
+.madlib__input {
     overflow: hidden;
 }
 
-.wm-madlib__input__text {
+.madlib__input__text {
+    @include f-headline;
+    font-size: 18px;
+    font-weight: 600;
     background: none;
     width: 100%;
     border: 0;
     outline: 0;
     margin: 0;
     padding: 4px 15px 3px;
+
+    &::-webkit-input-placeholder {
+       color: #767676;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+       color: #767676;
+    }
+
+    &::-moz-placeholder {  /* Firefox 19+ */
+       color: #767676;
+    }
+
+    &:-ms-input-placeholder {
+       color: #767676;
+    }
+
+    &:valid {
+        text-transform: uppercase;
+    }
 }
 
-.wm-madlib__input__btn {
+.madlib__input__btn {
     float: right;
     border: 0;
     border-radius: 100px;
     outline: 0;
     padding: 0;
     font-size: 0;
-    margin: -2px 3px 0 0;
+    margin: 4px 3px 0 0;
 
     transition: 0.1s color ease-out, 0.1s background ease-out;
     color: #333;
@@ -56,7 +80,7 @@
     }
 }
 
-.wm-madlib__note {
+.madlib__note {
     @include fs-textSans(2);
     color: #bdbdbd;
     width: 80px;
@@ -65,7 +89,7 @@
     margin: 9px 0 0 0;
 }
 
-.wm-madlib-options {
+.madlib-options {
     @include fs-textSans(1);
     line-height: 18px;
     color: #767676;
@@ -75,7 +99,7 @@
     }
 }
 
-.wm-button {
+.button {
     @include fs-textSans(1);
     line-height: 19px;
     font-weight: bold;
@@ -102,32 +126,32 @@
     }
 }
 
-@-webkit-keyframes wm-loading {
+@-webkit-keyframes loading {
     0%, 100% { background: #dcdcdc; }
     50% { background: #aad8f1; }
 }
-@keyframes wm-loading {
+@keyframes loading {
     0%, 100% { background: #dcdcdc; }
     50% { background: #aad8f1; }
 }
 
-@-webkit-keyframes wm-error {
+@-webkit-keyframes error {
     0%, 100% { background: #dcdcdc; color: #333; }
     50% { background: #d61d00; color: white; }
 }
-@keyframes wm-error {
+@keyframes error {
     0%, 100% { background: #dcdcdc; color: #333; }
     50% { background: #d61d00; color: white; }
 }
 
-.wm-madlib__location {
+.madlib__location {
     float: left;
     border: 0;
     border-radius: 100px;
     outline: 0;
     padding: 0;
     font-size: 0;
-    margin: -2px -5px 0 3px;
+    margin: 4px -5px 0 3px;
 
     display: none;
 
@@ -139,12 +163,12 @@
     }
 
     &[data-is-loading] {
-        -webkit-animation: wm-loading 0.5s infinite;
-        animation: wm-loading 0.5s infinite;
+        -webkit-animation: loading 0.5s infinite;
+        animation: loading 0.5s infinite;
     }
 
     &[data-has-error] {
-        -webkit-animation: wm-error 0.5s 1;
-        animation: wm-error 0.5s 1;
+        -webkit-animation: error 0.5s 1;
+        animation: error 0.5s 1;
     }
 }

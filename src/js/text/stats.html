@@ -1,0 +1,101 @@
+{{##def.bar:percentage:
+    {{?percentage}}
+        <div class="stat-bar" style="width: {{=it.stats.population.bme / it.max * 100}}%">
+            <div class="stat-bar__part" style="width: {{=percentage.bme / it.stats.population.bme * 100}}%"></div>
+        </div>
+        {{?percentage.ns > 0}}<div class="stat-ns">{{=(percentage.ns * 100).toFixed(1)}}% not stated</div>{{?}}
+    {{?}}
+#}}
+
+{{##def.p:percentage:
+    <span class="stat-p">
+        {{?percentage.bme === 0}}0{{??}}{{=(percentage.bme * 100).toFixed(1)}}{{?}}%
+    </span>
+#}}
+
+<h3 class="stat-force">{{=it.stats.name}}</h3>
+<div class="stats">
+    <div class="stats__row stats__row--border stats__row--community">
+        <div class="stats__row__desc">
+            The <b>community</b> is {{#def.p:it.stats.population}} BAME
+        </div>
+        <div class="stats__row__value">{{#def.bar:it.stats.population}}</div>
+    </div>
+    {{?!it.stats.applications && !it.stats.appointments}}
+        <div class="stats__row stats__row--border">
+            <div class="stats__row__desc no-data">
+                No data for applications or appointments
+            </div>
+            <div class="stats__row__value"></div>
+        </div>
+    {{??}}
+        <div class="stats__row">
+            <div class="stats__row__desc">
+                {{?it.stats.applications}}
+                    {{?it.stats.applications.bme < it.stats.population.bme}}
+                        However, they make up only
+                    {{??}}
+                        They make up
+                    {{?}}
+                    {{#def.p:it.stats.applications}} of <b>applicants</b>&hellip;
+                {{??}}
+                    <span class="no-data">No data for applications</span>
+                {{?}}
+            </div>
+            <div class="stats__row__value">{{#def.bar:it.stats.applications}}</div>
+        </div>
+        <div class="stats__row stats__row--border">
+            <div class="stats__row__desc">
+                {{?!it.stats.appointments}}
+                    <span class="no-data">No data for appointments</span>
+                {{??!it.stats.applications}}
+                    {{?it.stats.appointments.bme < it.stats.population.bme}}
+                        However, they make up {{?it.stats.appointments.bme > 0}}only{{?}}
+                    {{??}}
+                        They make up
+                    {{?}}
+                {{??it.stats.applications.bme > it.stats.population.bme && it.stats.appointments.bme < it.stats.population.bme}}
+                    only
+                {{?}}
+                {{?it.stats.appointments}}
+                    {{#def.p:it.stats.appointments}} of <b>appointments</b>
+                {{?}}
+            </div>
+            <div class="stats__row__value">{{#def.bar:it.stats.appointments}}</div>
+        </div>
+    {{?}}
+    <div class="stats__row stats__row--force">
+        <div class="stats__row__desc">
+            {{?!it.stats.applications && !it.stats.appointments}}
+                {{?it.stats.force.bme < it.stats.population.bme}}
+                    However, they make up only
+                {{??}}
+                    They make up
+                {{?}}
+            {{??}}
+                and
+            {{?}}
+            {{#def.p:it.stats.force}} of the <b>police force</b>
+        </div>
+        <div class="stats__row__value">{{#def.bar:it.stats.force}}</div>
+    </div>
+</div>
+<p class="stat-note">
+    {{?it.stats.name === 'Derbyshire Constabulary'}}
+        Data provided for applications and appointments did not indicate a time period
+    {{?}}
+    {{?it.stats.applicationYears || it.stats.appointmentYears}}
+        Data provided for
+        {{?it.stats.applicationYears === it.stats.appointmentYears}}
+            applications and appointments from {{=it.stats.applicationYears}}
+        {{??}}
+            {{?it.stats.applicationYears}}
+                applications from {{=it.stats.applicationYears}}
+                {{?it.stats.appointmentYears}}and for{{?}}
+            {{?}}
+            {{?it.stats.appointmentYears}}
+                appointments from {{=it.stats.appointmentYears}}
+            {{?}}
+        {{?}}
+    {{?}}
+</p>

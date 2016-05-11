@@ -13,7 +13,6 @@ System.config({
   },
 
   map: {
-    "ded/bowser": "github:ded/bowser@1.0.0",
     "guardian/iframe-messenger": "github:guardian/iframe-messenger@master",
     "json": "github:systemjs/plugin-json@0.1.0",
     "olado/doT": "github:olado/doT@1.0.1",

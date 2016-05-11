@@ -1,0 +1,14 @@
+<li class="regions__region">
+    <h2 class="region-title">
+        <img src="assets/imgs/regions/regions_{{=it.region.code}}.svg" class="region-title__img" />
+        {{=it.region.name}}
+    </h2>
+    <div class="region-col">
+        <p class="region-copy">{{=it.region.copy}}</p>
+        <ul class="forces">
+            {{~it.forceHTMLs :forceHTML:i}}
+                <li class="forces__force">{{=forceHTML}}</li>
+            {{~}}
+        </ul>
+    </div>
+</li>

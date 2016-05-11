@@ -1,6 +1,6 @@
 export default function (el, onchange) {
-    var text = el.querySelector('.wm-madlib__input__text');
-    var btn = el.querySelector('.wm-madlib__input__btn');
+    var text = el.querySelector('.madlib__input__text');
+    var btn = el.querySelector('.madlib__input__btn');
     var currentValue = '';
 
     function submit() {

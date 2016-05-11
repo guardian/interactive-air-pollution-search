@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: ['src/js/**/*'],
-                tasks: ['shell:interactive'],
+                tasks: ['shell'],
             },
             css: {
                 files: ['src/css/**/*'],
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
                 tasks: ['copy:assets']
             },
             harness: {
-                files: ['harness/**/*'],
+                files: ['harness/**/*', 'src/*.html'],
                 tasks: ['harness']
             }
         },
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 
         shell: {
             interactive: {
-                command: './node_modules/.bin/jspm bundle-sfx <%= visuals.jspmFlags %> src/js/main build/main.js --format amd',
+                command: './node_modules/.bin/jspm bundle-sfx <%= visuals.jspmFlags %> src/js/main build/main.js',
                 options: {
                     execOptions: {
                         cwd: '.'
@@ -81,6 +81,7 @@ module.exports = function(grunt) {
             harness: {
                 files: [
                     {expand: true, cwd: 'harness/', src: ['curl.js', 'index.html'], dest: 'build'},
+                    {expand: true, cwd: 'src/', src: ['*.html'], dest: 'build'}
                 ]
             },
             assets: {
@@ -90,15 +91,10 @@ module.exports = function(grunt) {
             },
             deploy: {
                 files: [
-                    { // BOOT
+                    {
                         expand: true, cwd: 'build/',
-                        src: ['boot.js'],
+                        src: ['boot.js', 'main.css', 'main.js', '*.html', 'assets/**/*'],
                         dest: 'deploy/<%= visuals.timestamp %>'
-                    },
-                    { // ASSETS
-                        expand: true, cwd: 'build/',
-                        src: ['main.js', 'main.css', 'main.js.map', 'main.css.map', 'assets/**/*'],
-                        dest: 'deploy/<%= visuals.timestamp %>/<%= visuals.timestamp %>'
                     }
                 ]
             }
@@ -165,20 +161,14 @@ module.exports = function(grunt) {
                 options: {
                 },
                 files: [
-                    { // ASSETS
+                    {
                         expand: true,
                         cwd: 'deploy/<%= visuals.timestamp %>',
-                        src: ['<%= visuals.timestamp %>/**/*'],
-                        dest: '<%= visuals.s3.path %>',
-                        params: { CacheControl: 'max-age=2678400' }
-                    },
-                    { // BOOT
-                        expand: true,
-                        cwd: 'deploy/<%= visuals.timestamp %>',
-                        src: ['boot.js'],
+                        src: ['**/*'],
                         dest: '<%= visuals.s3.path %>',
                         params: { CacheControl: 'max-age=60' }
-                    }]
+                    }
+                ]
             }
         },
 
@@ -219,10 +209,10 @@ module.exports = function(grunt) {
     })
 
     grunt.registerTask('harness', ['copy:harness', 'template:harness', 'sass:harness', 'symlink:fonts'])
-    grunt.registerTask('interactive', ['shell:interactive', 'template:bootjs', 'sass:interactive', 'copy:assets'])
+    grunt.registerTask('interactive', ['shell', 'template:bootjs', 'sass:interactive', 'copy:assets'])
     grunt.registerTask('default', ['clean', 'harness', 'interactive', 'connect', 'watch']);
     grunt.registerTask('build', ['clean', 'interactive']);
-    grunt.registerTask('deploy', ['loadDeployConfig', 'prompt:visuals', 'build', 'copy:deploy', 'aws_s3', 'boot_url']);
+    grunt.registerTask('deploy', ['loadDeployConfig', 'prompt:visuals', 'build', 'copy:harness', 'copy:deploy', 'aws_s3', 'boot_url']);
 
     grunt.loadNpmTasks('grunt-aws');
 
