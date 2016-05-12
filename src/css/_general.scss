@@ -139,3 +139,7 @@ h2 {
     width: 100%;
     margin-top: 10px;
 }
+
+.locate .small {
+    @include fs-headline(3);
+}

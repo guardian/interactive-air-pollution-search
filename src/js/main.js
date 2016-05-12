@@ -11,15 +11,6 @@ import statsHTML from './text/stats.html!text'
 
 var templateFn = doT.template(statsHTML);
 
-function locateForce(lat, lng) {
-    reqwest({
-        'url': `https://data.police.uk/api/locate-neighbourhood?q=${lat},${lng}`,
-        'type': 'json',
-        'crossOrigin': true,
-        'success': resp => sendEvent('show-force', {'forceId': resp.force})
-    });
-}
-
 window.embed = function (el) {
     var userLocationEl = el.querySelector('.js-gps');
 
