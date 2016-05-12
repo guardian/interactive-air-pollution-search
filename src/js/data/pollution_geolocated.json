@@ -2763,7 +2763,7 @@
 {"Country":"Poland","City":"KONICZYNKA","lon":18.6857763,"lat":53.0786152,"pm10":29,"Year":2013,"note on converted PM10":"measured data","pm25":21,"note on converted PM2.5":"converted from PM10"},
 {"Country":"Germany","City":"BREMEN","lon":8.8016937,"lat":53.0792962,"pm10":20,"Year":2013,"note on converted PM10":"measured data","pm25":13,"note on converted PM2.5":"measured data"},
 {"Country":"Poland","City":"OSTROLEKA","lon":21.5592554,"lat":53.0876544,"pm10":25,"Year":2013,"note on converted PM10":"measured data","pm25":18,"note on converted PM2.5":"converted from PM10"},
-{"Country":"United Kingdom","City":"GIBRALTAR","lon":0.322098,"lat":53.1002583,"pm10":31,"Year":2013,"note on converted PM10":"measured data","pm25":14,"note on converted PM2.5":"measured data"},
+{"Country":"United Kingdom","City":"GIBRALTAR","lat": 36.136416,"lon": -5.348463,"pm10":31,"Year":2013,"note on converted PM10":"measured data","pm25":14,"note on converted PM2.5":"measured data"},
 {"Country":"Poland","City":"MLAWA","lon":20.3837208,"lat":53.1122632,"pm10":32,"Year":2013,"note on converted PM10":"measured data","pm25":24,"note on converted PM2.5":"converted from PM10"},
 {"Country":"Poland","City":"BYDGOSZCZ","lon":18.0084378,"lat":53.1234804,"pm10":35,"Year":2013,"note on converted PM10":"measured data","pm25":21,"note on converted PM2.5":"measured data"},
 {"Country":"Poland","City":"WIDUCHOWA","lon":14.3906184,"lat":53.1268787,"pm10":24,"Year":2013,"note on converted PM10":"measured data","pm25":18,"note on converted PM2.5":"converted from PM10"},
