@@ -5,6 +5,11 @@ import madlib from './lib/madlib'
 import sendEvent from './lib/event'
 import geocode from './lib/geocode'
 import distance from './lib/distance'
+import toTitleCase from './lib/toTitleCase'
+import cities from './data/pollution_geolocated.json!'
+import statsHTML from './text/stats.html!text'
+
+var templateFn = doT.template(statsHTML);
 
 function locateForce(lat, lng) {
     reqwest({
@@ -28,7 +33,7 @@ window.embed = function (el) {
             geocode(loc, (err, resp) => {
                 if (!err) {
                     var center = resp.features[0].center;
-                    sendEvent('location', {'latlng': [center[1], center[0]], 'type': 'user'});
+                    sendEvent('location', {'latlng': [center[1], center[0]]});
                 }
             });
         
@@ -41,27 +46,31 @@ window.embed = function (el) {
             userLocationEl.setAttribute('data-is-loading', '');
 
             navigator.geolocation.getCurrentPosition(function (position) {
-                var loc = position.coords.latitude + "," + position.coords.longitude;
-                // console.log(loc);
+                userLocationEl.removeAttribute('data-is-loading');
+                sendEvent('location', {'latlng': [position.coords.latitude, position.coords.longitude]});
 
-                // geocode(loc, (err, resp) => {
-                //     if (!err) {
-                //         console.log(resp);
-                //     }
-                // });
             }, function (err) {
-                console.log(err);
                 userLocationEl.removeAttribute('data-is-loading');
                 userLocationEl.addAttribute('data-has-error', '');
             });
 
             userLocationEl.blur();
+
         });
     }
 
     window.addEventListener('location', evt => {
         var latlng = evt.detail.latlng;
-        console.log(distance(contrib.latlng, latlng))
+        var rankedCities = cities
+            .map(city => { return {city, 'distance': distance([city.lat, city.lon], latlng), 'name': toTitleCase(city.City) }; })
+            .sort((a, b) => a.distance - b.distance);
+
+        var city = rankedCities[0].city;
+        var howFar = rankedCities[0].distance;
+
+        var statsEl = el.querySelector('.js-stats');
+        statsEl.innerHTML = templateFn(rankedCities[0])
+
     });
 
     iframeMessenger.enableAutoResize();

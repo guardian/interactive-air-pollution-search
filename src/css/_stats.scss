@@ -1,14 +1,36 @@
 $d-sep: 4px;
 
-.stat-force {
-    @include fs-bodyHeading(3);
-    clear: left;
-    color: #767676;
-    margin: 24px 0 6px;
-}
-
 .stats {
-    @include fs-textSans(3);
+    @include fs-bodyCopy(2);
+    strong {
+        @include fs-header(2);
+    }
+
+    ul {
+        list-style: disc;
+        margin: 10px;
+        padding: 10px;
+        margin-top:-16px;
+    }
+
+    .stat-results {
+        @include f-textSans;
+        font-size:14px;
+    }
+
+    .big-number {
+        font-size:20px;
+        font-weight: 700;
+    }
+
+    .low {
+        color: #767676;
+    }
+
+    .high {
+        color: #ff5b3a;
+    }
+
 }
 
 .stats__row.stats__row--border {
